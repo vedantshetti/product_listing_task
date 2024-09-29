@@ -1,12 +1,22 @@
 import { ActionTypes } from "../constants/action-types";
-const intialState = {
+
+const initialState = {
   products: [],
+  categories: [],
+  selectedCategory: null,
+  searchQuery: "", // Added searchQuery to the initial state
 };
 
-export const productsReducer = (state = intialState, { type, payload }) => {
+export const productsReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.SET_PRODUCTS:
       return { ...state, products: payload };
+    case ActionTypes.SET_CATEGORIES:
+      return { ...state, categories: payload };
+    case ActionTypes.SET_SELECTED_CATEGORY:
+      return { ...state, selectedCategory: payload };
+    case ActionTypes.SET_SEARCH_QUERY: // New case for handling the search query
+      return { ...state, searchQuery: payload };
     default:
       return state;
   }

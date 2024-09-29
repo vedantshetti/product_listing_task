@@ -2,8 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ProductComponent = () => {
-  const products = useSelector((state) => state.allProducts.products);
+const ProductComponent = ({ products }) => {
+  if (products.length === 0) {
+    return <div>No products available for this category.</div>;
+  }
+
   const renderList = products.map((product) => {
     const { id, title, image, price, category } = product;
     return (
@@ -25,6 +28,7 @@ const ProductComponent = () => {
       </div>
     );
   });
+
   return <>{renderList}</>;
 };
 
